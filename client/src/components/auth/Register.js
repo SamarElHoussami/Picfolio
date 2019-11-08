@@ -38,6 +38,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
+<<<<<<< HEAD
 
     <Container>
         <h2>Register</h2>
@@ -78,6 +79,48 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         </Form>
       </Container>
 
+=======
+    <Fragment>
+    <div className="custom-div ">
+      <h2>Register</h2>
+      <p>Enter Your Information to Create a Profile</p>
+      <Form onSubmit={event => onSubmit(event)}>
+        <Form.Group controlId="formName">
+
+          <Form.Control type="text" placeholder="Enter Your Username" name='username' value={username}
+            onChange={event => onChange(event)}/>
+        </Form.Group>
+
+        <Form.Group controlId="formName">
+          <Form.Control type="text" placeholder="Enter Your Name" name='name' value={name}
+            onChange={event => onChange(event)}/>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicEmail">
+
+          <Form.Control type="email" placeholder="Enter email"  name='email' value={email}
+          onChange={event => onChange(event)} required/>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+
+          <Form.Control type="password" name="password" placeholder="Enter Password" minLength='6' value={password}
+          onChange={event => onChange(event)}/>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicConfirmPassword">
+
+          <Form.Control name="passwordVerify" type="password" placeholder="Confirm Password" minLength='6'
+          value={passwordVerify}  onChange={event => onChange(event)}/>
+        </Form.Group>
+        <Button className="custom-button" type="submit" >
+          Register
+        </Button>
+      </Form>
+        <p>Already have an account?<a href='/login'> Login </a></p>
+</div>
+    </Fragment>
+>>>>>>> 332933f9360abe65c5a2abc174078975c1d63a41
   );
 };
 
