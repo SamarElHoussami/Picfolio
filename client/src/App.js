@@ -11,6 +11,7 @@ import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import AddService from './components/profile-forms/AddService';
 import PublicProfile from './components/layout/PublicProfile';
+import Footer from './components/layout/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Redux
@@ -44,6 +45,7 @@ const App = () => {
             <Route exact path='/add-a-service' component={AddService} />
             <Route path='/profile/:handle' component={PublicProfile} />
           </Switch>
+          <Footer />
         </Fragment>
       </Router>
     </Provider>
