@@ -16,3 +16,5 @@ export const GET_PHOTO = 'GET_PHOTO';
 export const GET_ALL_PHOTOS = 'GET_PHOTO';
 export const PHOTO_ERROR = 'PHOTO_ERROR';
 export const GET_VIEW_PROFILE = 'GET_VIEW_PROFILE';
+export const GET_SEARCH = 'GET_SEARCH';
+export const SEARCH_ERROR = 'SEARCH_ERROR';

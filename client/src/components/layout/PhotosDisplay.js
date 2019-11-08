@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fileType from 'file-type';
-import {Carousel} from 'react-bootstrap';
+
 const PhotosDisplay = ({ photos }) => {
   useEffect(() => {
     setTimeout(() => {}, 1000);

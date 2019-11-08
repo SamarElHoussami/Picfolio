@@ -14,7 +14,6 @@ const ProfileInfo = ({ profile }) => {
 
   return (
     <Fragment>
-<<<<<<< HEAD
       <div>
         <ButtonGroup>
           <Link to='/edit-my-profile'>
@@ -27,34 +26,17 @@ const ProfileInfo = ({ profile }) => {
           </Link>
         </ButtonGroup>
       </div>
-=======
-
->>>>>>> 332933f9360abe65c5a2abc174078975c1d63a41
 
       {profile !== null ? (
         <Fragment>
           {profile.location ? <p>{profile.location}</p> : null}
           {profile.bio ? <p>{profile.bio}</p> : null}
-<<<<<<< HEAD
           {profile.social ? JSON.stringify(profile.social) : null}
           {profile.services ? JSON.stringify(profile.services) : null}
           <div className='upload-div'>
             <UploadPhoto />
           </div>
           <PhotosDisplayPrivate />
-=======
-          {profile.social
-            ? JSON.stringify(profile.social)
-            : null}
-          {profile.services
-            ? JSON.stringify(profile.services)
-            : null}
-        
-          <UploadPhoto />
-
-          <PhotosDisplay />
-
->>>>>>> 332933f9360abe65c5a2abc174078975c1d63a41
         </Fragment>
       ) : (
         <p>Loading</p>
