@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
-import { Navbar, Nav, NavDropdown, Button, FormControl, Form } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, FormControl, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from '../styles/navbarStyles.module.css';
 
@@ -64,9 +64,9 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
           onChange={event => onSearchChange(event)}
           required
         />
-        <Link variant='outline-secondary' as={Link} to={'/search/' + searchForm}>
+        <Nav.Link variant='outline-secondary' href={'/search/' + searchForm}>
           Search
-        </Link>
+        </Nav.Link>
       </Form>
       {!loading && isAuthenticated ? authLinks : guestLinks}
     </Navbar>
