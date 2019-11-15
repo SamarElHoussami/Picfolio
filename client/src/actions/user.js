@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_PROFILE, PROFILE_ERROR } from './types';
+import { GET_PROFILE, PROFILE_ERROR, GET_SEARCH, SEARCH_ERROR } from './types';
 
 // Get current user's profile
 export const getCurrentProfile = () => async dispatch => {
@@ -27,7 +27,7 @@ export const createProfile = (formData, history, edit = false) => async dispatch
       headers: {
         'Content-Type': 'application/json'
       }
-    }
+    };
 
     const res = await axios.post('api/users/me', formData, config);
 
@@ -42,13 +42,12 @@ export const createProfile = (formData, history, edit = false) => async dispatch
     if (!edit) {
       history.push('/profile');
     }
-
   } catch (err) {
     const error = err.response.data;
     if (error) {
       dispatch(setAlert(error.msg, 'danger'));
     }
-    
+
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
@@ -63,7 +62,7 @@ export const createUserService = (formData, history, edit = false) => async disp
       headers: {
         'Content-Type': 'application/json'
       }
-    }
+    };
 
     const res = await axios.post('api/users/me/services', formData, config);
 
@@ -78,16 +77,32 @@ export const createUserService = (formData, history, edit = false) => async disp
     if (!edit) {
       history.push('/profile');
     }
-
   } catch (err) {
     const error = err.response.data;
     if (error) {
       dispatch(setAlert(error.msg, 'danger'));
     }
-    
+
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Search for users based on search term
+export const searchForUsers = (searchTerm) => async dispatch => {
+  try {
+    const res = await axios.get('/api/users/search/' + searchTerm);
+
+    dispatch({
+      type: GET_SEARCH,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: SEARCH_ERROR,
+      payload: { msg: err.response }
     });
   }
 };

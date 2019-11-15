@@ -3,9 +3,11 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const _ = require('lodash');
 
 const auth = require('../../middleware/auth');
 const User = require('../../models/user');
+const Photo = require('../../models/photo');
 
 const router = express.Router();
 
@@ -127,13 +129,19 @@ router.get('/profile/:username', async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findOne({ username });
-    
+
     if (!user) {
-      console.log("no user");
+      console.log('no user');
       return res.status(400).json({ msg: 'There is no profile for this user' });
     }
 
-    res.send(user);
+    const photos = await Photo.find({ user: user._id });
+    const responseProfile = {
+      user: user,
+      photo: photos || []
+    };
+
+    res.send(responseProfile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -159,7 +167,6 @@ router.post('/me', auth, async (req, res) => {
   if (linkedin) profileFields.social.linkedin = linkedin;
   if (instagram) profileFields.social.instagram = instagram;
 
-  
   try {
     let user = await User.findById(req.user.id);
 
@@ -182,11 +189,14 @@ router.post('/me', auth, async (req, res) => {
   }
 });
 
+// @route   POST api/users/me/services
+// @desc    User can add a service to their profile
+// @access  Private
 router.post('/me/services', auth, async (req, res) => {
   const { name, description, price } = req.body;
 
   // Build a service object
-  const service = {} 
+  const service = {};
   if (name) service.name = name;
   if (description) service.description = description;
   if (price) service.price = price;
@@ -209,6 +219,35 @@ router.post('/me/services', auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
-  
-})
+});
+
+// @route   GET api/users/search/:searchTerm
+// @desc    Search for a user by name or username
+// @access  Public
+router.get('/search/:searchTerm', async (req, res) => {
+  try {
+    let results = [];
+    let usernameResults = [];
+    const { searchTerm } = req.params;
+
+    const searchRegex = new RegExp('.*' + searchTerm + '*.', 'i');
+    results = await User.find({ name: searchRegex });
+    usernameResults = await User.find({ username: searchRegex });
+
+    results = results.concat(usernameResults);
+
+    results = _.uniqBy(results, '_id')
+    console.log(results);
+    
+    if (results.length === 0) {
+      console.log('no user');
+      return res.status(200).json({ msg: 'There is no profile for this user' });
+    }
+    
+    res.send(results);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;

@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import {Button, Form} from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     username: '',
@@ -31,49 +32,75 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   // Redirect if already logged in
   if (isAuthenticated) {
-    return <Redirect to='/profile' />
+    return <Redirect to='/profile' />;
   }
 
   return (
     <Fragment>
-    <div className="custom-div ">
-      <h2>Register</h2>
-      <p>Enter Your Information to Create a Profile</p>
-      <Form onSubmit={event => onSubmit(event)}>
-        <Form.Group controlId="formName">
+      <div className='custom-div '>
+        <h2>Register</h2>
+        <p>Enter Your Information to Create a Profile</p>
+        <Form onSubmit={event => onSubmit(event)}>
+          <Form.Group controlId='formName'>
+            <Form.Control
+              type='text'
+              placeholder='Enter Your Username'
+              name='username'
+              value={username}
+              onChange={event => onChange(event)}
+            />
+          </Form.Group>
 
-          <Form.Control type="text" placeholder="Enter Your Username" name='username' value={username}
-            onChange={event => onChange(event)}/>
-        </Form.Group>
+          <Form.Group controlId='formName'>
+            <Form.Control
+              type='text'
+              placeholder='Enter Your Name'
+              name='name'
+              value={name}
+              onChange={event => onChange(event)}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formName">
-          <Form.Control type="text" placeholder="Enter Your Name" name='name' value={name}
-            onChange={event => onChange(event)}/>
-        </Form.Group>
+          <Form.Group controlId='formBasicEmail'>
+            <Form.Control
+              type='email'
+              placeholder='Enter email'
+              name='email'
+              value={email}
+              onChange={event => onChange(event)}
+              required
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId='formBasicPassword'>
+            <Form.Control
+              type='password'
+              name='password'
+              placeholder='Enter Password'
+              minLength='6'
+              value={password}
+              onChange={event => onChange(event)}
+            />
+          </Form.Group>
 
-          <Form.Control type="email" placeholder="Enter email"  name='email' value={email}
-          onChange={event => onChange(event)} required/>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-
-          <Form.Control type="password" name="password" placeholder="Enter Password" minLength='6' value={password}
-          onChange={event => onChange(event)}/>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicConfirmPassword">
-
-          <Form.Control name="passwordVerify" type="password" placeholder="Confirm Password" minLength='6'
-          value={passwordVerify}  onChange={event => onChange(event)}/>
-        </Form.Group>
-        <Button className="custom-button" type="submit" >
-          Register
-        </Button>
-      </Form>
-        <p>Already have an account?<a href='/login'> Login </a></p>
-</div>
+          <Form.Group controlId='formBasicConfirmPassword'>
+            <Form.Control
+              name='passwordVerify'
+              type='password'
+              placeholder='Confirm Password'
+              minLength='6'
+              value={passwordVerify}
+              onChange={event => onChange(event)}
+            />
+          </Form.Group>
+          <Button className='custom-button' type='submit'>
+            Register
+          </Button>
+        </Form>
+        <p>
+          Already have an account?<a href='/login'> Login </a>
+        </p>
+      </div>
     </Fragment>
   );
 };
@@ -81,7 +108,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

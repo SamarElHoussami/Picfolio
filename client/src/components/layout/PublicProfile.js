@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 
 import { getViewProfile } from '../../actions/view'
+import { PhotosDisplayPublic } from './PhotosDisplay';
 
 const PublicProfile = ({ view: { viewUser, loading, error }, match: { params }, getViewProfile}) => {
     useEffect(() => {
@@ -13,7 +13,8 @@ const PublicProfile = ({ view: { viewUser, loading, error }, match: { params }, 
     if(viewUser !== null) {
         return(
             <div> 
-                <h1>Welcome to <i>{viewUser.name}</i>'s profile!</h1>
+                <h1>{viewUser.name}</h1>
+                <PhotosDisplayPublic />
             </div>
         );
     } else if (error !== null) {

@@ -71,7 +71,19 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
           alt='Picfolio logo'
         />
       </Navbar.Brand>
-
+      <Form inline>
+        <FormControl
+          placeholder='Search for user...'
+          className='mr-sm-2'
+          aria-label='Search users field'
+          value={searchForm}
+          onChange={event => onSearchChange(event)}
+          required
+        />
+        <Nav.Link variant='outline-secondary' href={'/search/' + searchForm}>
+          Search
+        </Nav.Link>
+      </Form>
       {!loading && isAuthenticated ? authLinks : guestLinks}
 
     </Navbar>
