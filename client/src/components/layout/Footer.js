@@ -15,19 +15,13 @@ const Footer = () => {
 <Navbar className={styles.foot}>
 <div className="text-center">
 
-      <ul className={styles.linkList}>
-        <li>
-          <a href="#!">About Picfolio</a>
-        </li>
-        <li>
-          <a href="#!">FAQ</a>
-        </li>
-        <li>
-          <a href="#!">Contact Us</a>
-        </li>
-      </ul>
+      <div className={styles.linkList}>
+          <a style={{color:"gray"}} href="#!">About Picfolio</a>
+          <a style={{color:"gray"}} href="#!">FAQ</a>
+          <a style={{color:"gray"}} href="#!">Contact Us</a>
+      </div>
 
-      <div className={styles.copyright}>   © 2019 Copyright Picfolio Inc.
+      <div className={styles.copyright}>     © 2019 Copyright Picfolio Inc.
       </div>
 
 </div>

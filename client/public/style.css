@@ -4,11 +4,14 @@
 }
 
 .upload-div {
-  margin-top: 50px !important;
-  flex-direction: column !important;
+  margin-top: 10px !important;
   align-items: center !important;
-
-  padding-left: 25px !important;
+  width: 77% !important;
+  display: inline-block !important;
+  position: relative !important;
+  padding-left: 25% !important;
+  padding-bottom: 10px !important;
+  height: 20px;
 }
 
 .nav-text{
@@ -22,18 +25,18 @@
   text-decoration: none !important;
 }
 h1,h2,p {
-color: #752D7E !important;
+color: #752D7E;
 }
 
 h1.header{
 
-  color:  floralwhite !important;
+  color:  floralwhite;
   margin-left: 10vw;
 }
 
 
 h3 {
-color: #5B95BD !important;
+color: #5B95BD;
 }
 .custom-div {
 
@@ -42,6 +45,7 @@ color: #5B95BD !important;
     align-items: center !important;
     text-align: center !important;
     padding: 20px 250px 20px 250px !important;
+    height: 82vh;
 
 }
 .custom-button{

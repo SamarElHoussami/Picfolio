@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import {Row,Col} from 'react-bootstrap';
 
 import { getCurrentProfile } from '../../actions/user';
 import { getCurrentUserPhotos } from '../../actions/photo';
 
 import ProfileInfo from './ProfileInfo';
+import UploadPhoto from '../profile-forms/UploadPhoto';
+import PhotosDisplay from './PhotosDisplay';
 
 const Profile = ({
   auth: { user },
@@ -27,12 +30,16 @@ const Profile = ({
 
   return (
     <Fragment>
-      <h1>Welcome {user && user.name}</h1>
-    
-
       {/* Show page depending if user has submitted profile info already */}
       {profile !== undefined ? (
-        <ProfileInfo />
+        <Fragment>
+          <ProfileInfo />
+          <div>
+          <UploadPhoto />
+          <PhotosDisplay/>
+          </div>
+        </Fragment>
+        
       ) : (
         <Fragment>
           <p>You dont have a profile yet!</p>

@@ -1,10 +1,13 @@
 .foot {
-    background-color: ##f4d7fb;
+    background-color: #f8f9fa;
     margin-left: auto;
     display: flex;
     justify-content: center !important;
     align-items: center;
     list-style-type: none !important;
+    height: 8vh;
+    position: absolute;
+    bottom: 0;
 }
 
 .copyright {
@@ -13,13 +16,14 @@
     font-size: 10pt;
     vertical-align: middle;
     margin-left: 15px;
+    color: gray !important;
 }
 
 .linkList {
+    display: flex;
+    justify-content: space-around;
     text-align: center;
-    list-style-type: none !important;
-    list-style: unstyled !important;
-    padding-top: 0.1cm;
     font-size: 9pt;
+    padding-bottom: 5px;
     vertical-align: middle;
 }

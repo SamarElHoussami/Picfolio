@@ -77,7 +77,7 @@ const EditProfile = ({ createProfile, history, isAuthenticated, profile }) => {
             </Form.Group>
 
             <Form.Group controlId="formInstagram">
-              <Form.Control type="text" name="linkedin" placeholder="Enter Instagram link" value={instagram}
+              <Form.Control type="text" name="instagram" placeholder="Enter Instagram link" value={instagram}
               onChange={event => onChange(event)}/>
             </Form.Group>
 

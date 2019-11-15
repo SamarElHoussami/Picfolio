@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fileType from 'file-type';
 import {Carousel} from 'react-bootstrap';
+import styles from '../styles/landingStyles.module.css';
+
 const PhotosDisplay = ({ photos }) => {
   useEffect(() => {
     setTimeout(() => {}, 1000);
@@ -14,7 +16,7 @@ const PhotosDisplay = ({ photos }) => {
   let mime;
 
   return (
-    <Fragment>
+    <div className={styles.photo_display}>
       {photos !== undefined? (
         photos.map((photo, index) => {
           photoBuffer = photo.photo.data;
@@ -25,13 +27,13 @@ const PhotosDisplay = ({ photos }) => {
           // b64encoded = btoa(String.fromCharCode.apply(null, photoBuffer));
           mime = fileType(Buffer.from(photoBuffer)).mime;
           data = 'data:' + mime + ';base64,' + b64encoded;
-          return <div key={index+'div'}><img height="300" width="400" key={index} src={data} /></div>;
+          return <div className={styles.image_container} key={index+'div'}><img className={styles.display_image} key={index} src={data} /></div>;
         })
       ) : (
         <p>Loading</p>
       )}
 
-    </Fragment>
+    </div>
   );
 };
 
