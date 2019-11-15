@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
+const _ = require('lodash');
 
 const auth = require('../../middleware/auth');
 const User = require('../../models/user');
@@ -225,23 +226,25 @@ router.post('/me/services', auth, async (req, res) => {
 // @access  Public
 router.get('/search/:searchTerm', async (req, res) => {
   try {
-    let users;
+    let results = [];
+    let usernameResults = [];
     const { searchTerm } = req.params;
 
     const searchRegex = new RegExp('.*' + searchTerm + '*.', 'i');
-    users = await User.find({ name: searchRegex });
+    results = await User.find({ name: searchRegex });
+    usernameResults = await User.find({ username: searchRegex });
 
-    console.log(users);
-    if (users.length === 0) {
-      users = await User.find({ username: searchRegex });
-      if (user.length === 0) {
-        console.log('no user');
-        return res.status(400).json({ msg: 'There is no profile for this user' });
-      }
-      return res.send(users);
+    results = results.concat(usernameResults);
+
+    results = _.uniqBy(results, '_id')
+    console.log(results);
+    
+    if (results.length === 0) {
+      console.log('no user');
+      return res.status(200).json({ msg: 'There is no profile for this user' });
     }
     
-    res.send(users);
+    res.send(results);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
