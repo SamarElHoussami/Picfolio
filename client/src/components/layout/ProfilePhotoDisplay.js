@@ -2,9 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fileType from 'file-type';
-import styles from '../styles/landingStyles.module.css';
+import {Button, ButtonGroup, Container,Row,Col, Image} from 'react-bootstrap';
 
-const PhotosDisplay = ({ photos }) => {
+const ProfilePhotoDisplay = ({ profilephotos }) => {
   useEffect(() => {
     setTimeout(() => {}, 1000);
   }, []);
@@ -15,18 +15,19 @@ const PhotosDisplay = ({ photos }) => {
   let mime;
 
   return (
-    <div className={styles.photo_display}>
-      {photos !== undefined? (
-        photos.map((photo, index) => {
-          photoBuffer = photo.photo.data;
-          console.log(photo);
+    <div >
+      {profilephotos !== undefined? (
+        profilephotos.map((profilePhoto, index) => {
+          photoBuffer = profilePhoto.profilePhoto.data;
+          console.log(profilePhoto);
           b64encoded = btoa(new Uint8Array(photoBuffer).reduce(function(data, byte) {
             return data + String.fromCharCode(byte);
           }, ''));
           // b64encoded = btoa(String.fromCharCode.apply(null, photoBuffer));
           mime = fileType(Buffer.from(photoBuffer)).mime;
           data = 'data:' + mime + ';base64,' + b64encoded;
-          return <div className={styles.image_container} key={index+'div'}><img className={styles.display_image} key={index} src={data} /></div>;
+          return <div className="container"><Image src={data} className="image" key={0} roundedCircle responsive thumbnail fluid />
+        </div>;
         })
       ) : (
         <p>Loading</p>
@@ -36,15 +37,15 @@ const PhotosDisplay = ({ photos }) => {
   );
 };
 
-PhotosDisplay.propTypes = {
-  photos: PropTypes.array
+ProfilePhotoDisplay.propTypes = {
+  profilephotos: PropTypes.array
 };
 
 const mapStateToProps = state => ({
-  photos: state.photo.photos
+  profilephotos: state.profilePhoto.profilephotos
 });
 
 export default connect(
   mapStateToProps,
   {}
-)(PhotosDisplay);
+)(ProfilePhotoDisplay);

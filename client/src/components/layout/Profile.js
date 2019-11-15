@@ -33,13 +33,14 @@ const Profile = ({
       {/* Show page depending if user has submitted profile info already */}
       {profile !== undefined ? (
         <Fragment>
+          
           <ProfileInfo />
           <div>
           <UploadPhoto />
           <PhotosDisplay/>
           </div>
         </Fragment>
-        
+
       ) : (
         <Fragment>
           <p>You dont have a profile yet!</p>

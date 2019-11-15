@@ -14,5 +14,7 @@ export const GET_SERVICE = 'GET_SERVICE';
 export const SERVICE_ERROR = 'SERVICE_ERROR';
 export const GET_PHOTO = 'GET_PHOTO';
 export const GET_ALL_PHOTOS = 'GET_PHOTO';
+export const GET_PROFILE_PHOTO = 'GET_PROFILE_PHOTO';
+export const GET_ALL_PROFILE_PHOTOS = 'GET_PROFILE_PHOTO';
 export const PHOTO_ERROR = 'PHOTO_ERROR';
 export const GET_VIEW_PROFILE = 'GET_VIEW_PROFILE';
