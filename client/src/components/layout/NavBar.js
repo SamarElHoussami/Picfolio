@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import { Navbar, Nav, NavDropdown, Button, FormControl, Form, Row } from 'react-bootstrap';
@@ -16,8 +17,10 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
   };
 
   const onSearchSubmit = event => {
-    setSearchForm(event.target.value);
+    event.preventDefault();
+    return <Redirect to={'/profile/'+searchForm} />
   };
+
   const onClickLogout = event => {
     event.preventDefault();
     logout();
@@ -47,7 +50,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className={styles.nav_container}>
     <Nav className='mr-0 mt-2 ' >
       <Nav.Link >
-        <form className="form-inline mr-5"  onSubmit={event => onSearchSubmit(event)}>
+        <form className="form-inline mr-5">
         <input className="form-control form-control-sm mr-3 w-75" style={{width: "100%"}} type="text" placeholder="Search by name or location"
         aria-label="Search users field" value={searchForm} onChange={event => onSearchChange(event)}
         required/>
@@ -71,19 +74,6 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
           alt='Picfolio logo'
         />
       </Navbar.Brand>
-      <Form inline>
-        <FormControl
-          placeholder='Search for user...'
-          className='mr-sm-2'
-          aria-label='Search users field'
-          value={searchForm}
-          onChange={event => onSearchChange(event)}
-          required
-        />
-        <Nav.Link variant='outline-secondary' href={'/search/' + searchForm}>
-          Search
-        </Nav.Link>
-      </Form>
       {!loading && isAuthenticated ? authLinks : guestLinks}
 
     </Navbar>

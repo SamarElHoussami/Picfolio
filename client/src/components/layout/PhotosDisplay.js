@@ -19,7 +19,6 @@ const PhotosDisplay = ({ photos }) => {
       {photos !== undefined? (
         photos.map((photo, index) => {
           photoBuffer = photo.photo.data;
-          console.log(photo);
           b64encoded = btoa(new Uint8Array(photoBuffer).reduce(function(data, byte) {
             return data + String.fromCharCode(byte);
           }, ''));

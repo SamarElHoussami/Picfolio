@@ -228,22 +228,26 @@ router.get('/search/:searchTerm', async (req, res) => {
   try {
     let results = [];
     let usernameResults = [];
+    let locationResults = [];
+
     const { searchTerm } = req.params;
 
     const searchRegex = new RegExp('.*' + searchTerm + '*.', 'i');
     results = await User.find({ name: searchRegex });
     usernameResults = await User.find({ username: searchRegex });
-
     results = results.concat(usernameResults);
 
-    results = _.uniqBy(results, '_id')
-    console.log(results);
-    
+    locationResults = await User.find({ 'profile.location': searchRegex });
+
+    console.log(locationResults);
+    results = results.concat(locationResults);
+
+    results = _.uniqBy(results, '_id');
+
     if (results.length === 0) {
-      console.log('no user');
-      return res.status(200).json({ msg: 'There is no profile for this user' });
+      return res.status(200).json({ msg: 'There were no found results' });
     }
-    
+
     res.send(results);
   } catch (err) {
     console.error(err.message);

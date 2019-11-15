@@ -10,7 +10,7 @@ import { getCurrentUserPhotos } from '../../actions/photo';
 
 import ProfileInfo from './ProfileInfo';
 import UploadPhoto from '../profile-forms/UploadPhoto';
-import PhotosDisplay from './PhotosDisplay';
+import { PhotosDisplayPrivate } from './PhotosDisplay';
 
 const Profile = ({
   auth: { user },
@@ -37,7 +37,7 @@ const Profile = ({
           <ProfileInfo />
           <div>
           <UploadPhoto />
-          <PhotosDisplay/>
+          <PhotosDisplayPrivate/>
           </div>
         </Fragment>
 
