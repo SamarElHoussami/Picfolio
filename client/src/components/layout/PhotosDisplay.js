@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import fileType from 'file-type';
-import styles from '../styles/landingStyles.module.css';
+import styles from '../styles/profileStyles.module.css';
 
 const PhotosDisplay = ({ photos }) => {
   useEffect(() => {

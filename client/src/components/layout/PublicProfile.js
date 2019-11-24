@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 
 import { getViewProfile } from '../../actions/view'
 import { PhotosDisplayPublic } from './PhotosDisplay';
+import { ProfileInfoPublic } from './ProfileInfo';
 
 const PublicProfile = ({ view: { viewUser, loading, error }, match: { params }, getViewProfile}) => {
     useEffect(() => {
         getViewProfile(params.handle);
+        setTimeout(() => {}, 1000);
     }, [loading]);
 
     if(viewUser !== null) {
         return(
             <div> 
-                <h1>{viewUser.name}</h1>
+                <ProfileInfoPublic />
                 <PhotosDisplayPublic />
             </div>
         );

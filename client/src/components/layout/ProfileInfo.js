@@ -9,25 +9,29 @@ import facebook_icon from "../../images/icons/facebook_icon.png"
 import linkedin_icon from "../../images/icons/linkedin_icon.png"
 import instagram_icon from "../../images/icons/instagram_icon.png"
 import location_icon from "../../images/icons/location_icon.png"
+import user_icon from "../../images/icons/user_icon.png"
 
 import UploadPhoto from '../profile-forms/UploadPhoto';
 import PhotosDisplay from './PhotosDisplay';
 import ProfilePhotoDisplay from './ProfilePhotoDisplay';
 import UploadProfilePhoto from '../profile-forms/UploadProfilePhoto';
 
-import styles from '../styles/landingStyles.module.css';
+import styles from '../styles/profileStyles.module.css';
 
-const ProfileInfo = ({user: { profile }, auth: { user }}) => {
+const ProfileInfo = ({ profile , user, auth: { isAuthenticated }}) => {
   useEffect(() => {
     setTimeout(() => {}, 1000);
   }, []);
 
+  {console.log(profile)}
   return (
     <div className={styles.profile_info}>
       {profile !== null ? (
         <div>
-        <div className="container"><Image src="profile_pic_example.jfif" className="image"  roundedCircle responsive thumbnail fluid />
-        <div className="middle">  <UploadProfilePhoto /></div></div>
+        <div className="container">
+          <Image src={user_icon} className={styles.profile_image} />
+          {isAuthenticated? <div className="middle"><UploadProfilePhoto /></div> : null}
+        </div>
 
             {user !== null? <h1 className={styles.name_display}>{user.name}</h1> : null }
             {user !== null? <h3 className={styles.username_display}>@{user.username}</h3> : null}
@@ -56,15 +60,27 @@ const ProfileInfo = ({user: { profile }, auth: { user }}) => {
 };
 
 ProfileInfo.propTypes = {
+  profile: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
+const mapStateToPropsPrivate = state => ({
+  profile: state.user.profile,
+  user: state.auth.user,
   auth: state.auth});
 
-export default connect(
-  mapStateToProps,
+const mapStateToPropsPublic = state => ({
+  profile: state.view.viewUser.profile,
+  user: state.view.viewUser,
+  auth: state.auth});
+
+export const ProfileInfoPrivate = connect(
+  mapStateToPropsPrivate,
+  {}
+)(ProfileInfo);
+
+export const ProfileInfoPublic = connect(
+  mapStateToPropsPublic,
   {}
 )(ProfileInfo);

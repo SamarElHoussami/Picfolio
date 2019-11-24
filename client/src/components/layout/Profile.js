@@ -8,7 +8,7 @@ import {Row,Col} from 'react-bootstrap';
 import { getCurrentProfile } from '../../actions/user';
 import { getCurrentUserPhotos } from '../../actions/photo';
 
-import ProfileInfo from './ProfileInfo';
+import { ProfileInfoPrivate } from './ProfileInfo';
 import UploadPhoto from '../profile-forms/UploadPhoto';
 import { PhotosDisplayPrivate } from './PhotosDisplay';
 
@@ -34,7 +34,7 @@ const Profile = ({
       {profile !== undefined ? (
         <Fragment>
           
-          <ProfileInfo />
+          <ProfileInfoPrivate />
           <div>
           <UploadPhoto />
           <PhotosDisplayPrivate/>
