@@ -8,7 +8,7 @@ const _ = require('lodash');
 const auth = require('../../middleware/auth');
 const User = require('../../models/user');
 const Photo = require('../../models/photo');
-
+const ProfilePhoto = require('../../models/profilephoto');
 const router = express.Router();
 
 // @route    POST api/users
@@ -136,12 +136,17 @@ router.get('/profile/:username', async (req, res) => {
     }
 
     const photos = await Photo.find({ user: user._id });
+    const profilephotos = await ProfilePhoto.find({ user: user._id });
     const responseProfile = {
       user: user,
-      photo: photos || []
+      photo: photos || [],
+      profilephoto: profilephotos || []
     };
 
     res.send(responseProfile);
+
+
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

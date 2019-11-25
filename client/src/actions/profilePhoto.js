@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_PROFILE_PHOTO, PHOTO_ERROR, GET_ALL_PROFILE_PHOTOS } from './types';
+import { GET_PROFILE_PHOTO, PROFILE_PHOTO_ERROR, GET_ALL_PROFILE_PHOTOS } from './types';
 
 // Upload photo for current user
 export const uploadProfilePhoto = (formData, history) => async dispatch => {
@@ -28,18 +28,18 @@ export const uploadProfilePhoto = (formData, history) => async dispatch => {
   }
 };
 
-export const getCurrentUserProfilePhotos = () => async dispatch => {
+export const getCurrentUserProfilePhoto = () => async dispatch => {
   try {
     const res = await axios.get('/api/profilePhoto/me');
 
     dispatch({
-      type: GET_ALL_PROFILE_PHOTOS,
+      type: GET_PROFILE_PHOTO,
       payload: res.data
     });
   } catch (err) {
     console.error(err.msg);
     dispatch({
-      type: PHOTO_ERROR,
+      type: PROFILE_PHOTO_ERROR,
       payload: { msg: err.response }
     });
   }

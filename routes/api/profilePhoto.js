@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const auth = require('../../middleware/auth');
 const User = require('../../models/user');
-const ProfilePhoto = require('../../models/ProfilePhoto');
+const ProfilePhoto = require('../../models/profilephoto');
 const uploadProfilePhoto = require('./uploadProfilePhoto');
 
 const router = express.Router();

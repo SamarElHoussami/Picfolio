@@ -11,13 +11,14 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-  
+
   switch (type) {
     case GET_VIEW_PROFILE:
       return {
         ...state,
         viewUser: payload.user,
         viewPhoto: payload.photo,
+        viewProfilePhoto:payload.profilePhoto,
         loading: false
       }
       case PROFILE_ERROR:

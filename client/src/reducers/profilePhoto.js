@@ -1,4 +1,4 @@
-import { GET_PROFILE_PHOTO, GET_ALL_PROFILE_PHOTOS, PHOTO_ERROR } from "../actions/types";
+import { GET_PROFILE_PHOTO, GET_ALL_PROFILE_PHOTOS, PROFILE_PHOTO_ERROR } from "../actions/types";
 
 const initialState = {
   profilePhotos: [],
@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
         profilePhotos: [...state.profilePhotos, ...payload],
         loading: false
       }
-    case PHOTO_ERROR:
+    case PROFILE_PHOTO_ERROR:
       return {
         ...state,
         error: payload,

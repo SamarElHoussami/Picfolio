@@ -9,12 +9,12 @@ import facebook_icon from "../../images/icons/facebook_icon.png"
 import linkedin_icon from "../../images/icons/linkedin_icon.png"
 import instagram_icon from "../../images/icons/instagram_icon.png"
 import location_icon from "../../images/icons/location_icon.png"
-
+import { getCurrentUserProfilePhoto } from '../../actions/profilePhoto';
 import UploadPhoto from '../profile-forms/UploadPhoto';
 import PhotosDisplay from './PhotosDisplay';
 import ProfilePhotoDisplay from './ProfilePhotoDisplay';
 import UploadProfilePhoto from '../profile-forms/UploadProfilePhoto';
-
+import { ProfilePhotoDisplayPrivate } from './ProfilePhotoDisplay';
 import styles from '../styles/landingStyles.module.css';
 
 const ProfileInfo = ({user: { profile }, auth: { user }}) => {
@@ -26,8 +26,10 @@ const ProfileInfo = ({user: { profile }, auth: { user }}) => {
     <div className={styles.profile_info}>
       {profile !== null ? (
         <div>
-        <div className="container"><Image src="profile_pic_example.jfif" className="image"  roundedCircle responsive thumbnail fluid />
-        <div className="middle">  <UploadProfilePhoto /></div></div>
+        //<div className="container"><Image src="profile_pic_example2.jfif" className="image"  roundedCircle fluid />
+        <ProfilePhotoDisplayPrivate/>
+        <div className="middle">  <UploadProfilePhoto /></div>
+        </div>
 
             {user !== null? <h1 className={styles.name_display}>{user.name}</h1> : null }
             {user !== null? <h3 className={styles.username_display}>@{user.username}</h3> : null}
@@ -66,5 +68,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  {getCurrentUserProfilePhoto}
 )(ProfileInfo);

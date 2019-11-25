@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import fileType from 'file-type';
 import {Button, ButtonGroup, Container,Row,Col, Image} from 'react-bootstrap';
 
-const ProfilePhotoDisplay = ({ profilephotos }) => {
+const ProfilePhotoDisplay = ({ profilePhotos }) => {
   useEffect(() => {
     setTimeout(() => {}, 1000);
   }, []);
@@ -16,18 +16,16 @@ const ProfilePhotoDisplay = ({ profilephotos }) => {
 
   return (
     <div >
-      {profilephotos !== undefined? (
-        profilephotos.map((profilePhoto, index) => {
+      {profilePhotos !== undefined? (
+        profilePhotos.map((profilePhoto, index) => {
           photoBuffer = profilePhoto.profilePhoto.data;
-          console.log(profilePhoto);
           b64encoded = btoa(new Uint8Array(photoBuffer).reduce(function(data, byte) {
             return data + String.fromCharCode(byte);
           }, ''));
           // b64encoded = btoa(String.fromCharCode.apply(null, photoBuffer));
           mime = fileType(Buffer.from(photoBuffer)).mime;
           data = 'data:' + mime + ';base64,' + b64encoded;
-          return <div className="container"><Image src={data} className="image" key={0} roundedCircle responsive thumbnail fluid />
-        </div>;
+          return <div key={index+'div'}><img  key={index} src={data} /></div>;
         })
       ) : (
         <p>Loading</p>
@@ -41,11 +39,20 @@ ProfilePhotoDisplay.propTypes = {
   profilephotos: PropTypes.array
 };
 
-const mapStateToProps = state => ({
-  profilephotos: state.profilePhoto.profilephotos
+const mapStateToPropsPrivate = state => ({
+  profilephotos: state.profilePhoto.profilePhotos
 });
 
-export default connect(
-  mapStateToProps,
+const mapStateToPropsPublic = state => ({
+  profilephotos: state.view.viewProfilePhoto
+})
+
+export const ProfilePhotoDisplayPrivate = connect(
+  mapStateToPropsPrivate,
+  {}
+)(ProfilePhotoDisplay);
+
+export const ProfielPhotoDisplayPublic = connect(
+  mapStateToPropsPublic,
   {}
 )(ProfilePhotoDisplay);
