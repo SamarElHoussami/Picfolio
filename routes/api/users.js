@@ -242,7 +242,7 @@ router.get('/search/:searchTerm', async (req, res) => {
     console.log(locationResults);
     results = results.concat(locationResults);
 
-    results = _.uniqBy(results, '_id');
+    results = _.uniqBy(results, 'username');
 
     if (results.length === 0) {
       return res.status(200).json({ msg: 'There were no found results' });

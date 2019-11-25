@@ -26,8 +26,7 @@ const ProfilePhotoDisplay = ({ profilephotos }) => {
           // b64encoded = btoa(String.fromCharCode.apply(null, photoBuffer));
           mime = fileType(Buffer.from(photoBuffer)).mime;
           data = 'data:' + mime + ';base64,' + b64encoded;
-          return <div className="container"><Image src={data} className="image" key={0} roundedCircle responsive thumbnail fluid />
-        </div>;
+          return <div key={index} className="container"><Image src={data} className="image" key={0} roundedCircle responsive thumbnail fluid /></div>;
         })
       ) : (
         <p>Loading</p>
