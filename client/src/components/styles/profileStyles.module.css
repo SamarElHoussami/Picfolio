@@ -78,19 +78,20 @@
     font-weight: bold;
     height: 20px;
     font-size: 20px;
+    display: inline-block;
   }
   
   .service_description {
     color: rgb(43, 42, 42);
     font-family: 'Ubuntu', sans-serif;
     font-size: 15px;
-    height: 15px;
+    height: 10px;
   }
   
   .service_price {
     color: rgb(37, 1, 94);
     font-family: 'Ubuntu', sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
   }
 
@@ -124,3 +125,10 @@
     height: 350px;
     object-fit: scale-down;
   }
+
+  .cardStyle {
+    display: inline-block;
+    margin-left: 2vw;
+    width: 100vw;
+    padding: 10px 0;
+    }

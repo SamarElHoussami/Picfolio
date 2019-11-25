@@ -39,11 +39,14 @@ const ProfileInfo = ({ profile , user, auth: { isAuthenticated }}) => {
               <div className={styles.bio_container}>
                 {profile.bio ? <p className={styles.bio}>{profile.bio}</p> : null}
               </div>
-              <div>
-                {(profile.services && profile.services.length) ? <p className={styles.service_name}>Service: {profile.services[0].name}</p> : null}
-                {(profile.services && profile.services.length) ? <p className={styles.service_description}>{profile.services[0].description}</p> : null}
-                {(profile.services && profile.services.length) ? <p className={styles.service_price}>Price: ${profile.services[0].price}</p> : null}
-              </div>
+              {profile.services !== null ? 
+                profile.services.map((service, i) => { return(
+                  <div key={i}>
+                    <p className={styles.service_name}>{service.name}</p> 
+                    <p className={styles.service_description}>{service.description}</p> 
+                    <p className={styles.price}>Price: ${service.price}</p> 
+                  </div>
+                )}) : null}
               <div className={styles.social_links}>
                 {profile.social && profile.social.youtube ? <a href={profile.social.youtube}><img className={styles.icon} alt="youtube" src={youtube_icon}/></a>: null}
                 {profile.social && profile.social.twitter ? <a href={profile.social.twitter}><img className={styles.icon} alt="twitter" src={twitter_icon}/></a>: null}
