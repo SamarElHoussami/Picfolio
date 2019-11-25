@@ -29,6 +29,8 @@ router.post(
   ],
   async (req, res) => {
     try {
+      let user;
+
       // Will contain above errors if there are any
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -37,9 +39,14 @@ router.post(
 
       // Check if user with email already exists
       const { username, name, email, password } = req.body;
-      let user = await User.findOne({ email });
+      user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: 'That user already exists' });
+        return res.status(400).json({ msg: 'A user with that email already exists.' });
+      }
+
+      user = await User.findOne({ username })
+      if (user) {
+        return res.status(400).json({ msg: 'A user with that username already exists.'});s
       }
 
       user = new User({
@@ -227,22 +234,28 @@ router.post('/me/services', auth, async (req, res) => {
 router.get('/search/:searchTerm', async (req, res) => {
   try {
     let results = [];
-    let usernameResults = [];
-    let locationResults = [];
 
     const { searchTerm } = req.params;
+    
+    const users = await User.find();
 
     const searchRegex = new RegExp('.*' + searchTerm + '*.', 'i');
-    results = await User.find({ name: searchRegex });
-    usernameResults = await User.find({ username: searchRegex });
-    results = results.concat(usernameResults);
 
-    locationResults = await User.find({ 'profile.location': searchRegex });
+    users.forEach(function (user) {
+      if(searchRegex.test(user.name) || searchRegex.test(user.username) || searchRegex.test(user.profile.location)) {
+        results = results.concat(user);
+      }
 
-    console.log(locationResults);
-    results = results.concat(locationResults);
+      if(user.profile.services !== undefined) {
+        user.profile.services.forEach(function (service){
+          if(searchRegex.test(service.name) || searchRegex.test(service.description)) {
+            results = results.concat(user);
+          }
+        })
+      }
+    });
 
-    results = _.uniqBy(results, '_id');
+    results = _.uniqBy(results, 'username');
 
     if (results.length === 0) {
       return res.status(200).json({ msg: 'There were no found results' });

@@ -3,9 +3,10 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { uploadPhoto } from '../../actions/photo';
+import { uploadPhoto, getCurrentUserPhotos } from '../../actions/photo';
 import {Button, Row, Col,Form} from 'react-bootstrap';
-const UploadPhoto = ({ uploadPhoto, history }) => {
+
+const UploadPhoto = ({ uploadPhoto, getCurrentUserPhotos, history }) => {
   const [caption, setCaption] = useState('');
   const [photo, setPhoto] = useState([]);
 
@@ -29,6 +30,7 @@ const UploadPhoto = ({ uploadPhoto, history }) => {
       console.log(pair[0] + ' ' + pair[1]);
     }
     uploadPhoto(form, history);
+    getCurrentUserPhotos();
 
     window.location.replace('/profile');
   };
@@ -80,10 +82,11 @@ const UploadPhoto = ({ uploadPhoto, history }) => {
 
 UploadPhoto.propTypes = {
   uploadPhoto: PropTypes.func.isRequired,
+  getCurrentUserPhotos: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
 };
 
 export default connect(
   null,
-  { uploadPhoto }
+  { uploadPhoto, getCurrentUserPhotos }
 )(withRouter(UploadPhoto));

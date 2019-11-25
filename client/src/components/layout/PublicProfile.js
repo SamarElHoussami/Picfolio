@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Spinner } from 'react-bootstrap';
 
 import { getViewProfile } from '../../actions/view'
 import { PhotosDisplayPublic } from './PhotosDisplay';
@@ -10,7 +11,7 @@ const PublicProfile = ({ view: { viewUser, loading, error }, match: { params }, 
     useEffect(() => {
         getViewProfile(params.handle);
         setTimeout(() => {}, 1000);
-    }, [loading]);
+    }, []);
 
     if(viewUser !== null) {
         return(
@@ -19,11 +20,13 @@ const PublicProfile = ({ view: { viewUser, loading, error }, match: { params }, 
                 <PhotosDisplayPublic />
             </div>
         );
+    } else if (loading) {
+        return <Spinner animation='border' role='status'></Spinner>
     } else if (error !== null) {
         return(
             <h1>User was not found</h1>
         )
-    }
+    } 
     else {
         return(
             <h1>loading...</h1>

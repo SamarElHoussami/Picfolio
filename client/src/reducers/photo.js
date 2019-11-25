@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
     case GET_PHOTO:
       return {
         error: {},
-        photos: [...state.photos, ...payload],
+        photos: [...state.profilePhotos, ...payload],
         loading: false
       }
     case PHOTO_ERROR:

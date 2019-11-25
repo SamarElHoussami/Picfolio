@@ -16,8 +16,9 @@ const PhotosDisplay = ({ photos }) => {
 
   return (
     <div className={styles.photo_display}>
-      {photos !== undefined? (
-        photos.map((photo, index) => {
+      {((photos !== undefined) && (photos !== null)) ? (
+        console.log(photos),
+        photos.slice(0).reverse().map((photo, index) => {
           photoBuffer = photo.photo.data;
           b64encoded = btoa(new Uint8Array(photoBuffer).reduce(function(data, byte) {
             return data + String.fromCharCode(byte);
@@ -42,7 +43,7 @@ PhotosDisplay.propTypes = {
 const mapStateToPropsPrivate = state => ({
   photos: state.photo.photos
 });
-
+  
 const mapStateToPropsPublic = state => ({
   photos: state.view.viewPhoto
 })
