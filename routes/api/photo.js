@@ -39,7 +39,7 @@ router.post('/', [auth, upload.single('myPhoto')], async (req, res) => {
   }
 });
 
-// @route    GET api/photo
+// @route    GET api/photo/me
 // @desc     Get logged-in user's photos
 // @access   Private
 router.get('/me', auth, async (req, res) => {

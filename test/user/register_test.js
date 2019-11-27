@@ -24,6 +24,7 @@ describe('POST /api/users', () => {
 
   const defaultUser = {
     name: 'John Smith',
+    username: 'johnsmither',
     email: 'john@example.com',
     password: '123456'
   };
@@ -34,9 +35,10 @@ describe('POST /api/users', () => {
       .post('/api/users')
       .send(defaultUser)
       .end((err, res) => {
-        // res.should.have.status(200);
+        res.should.have.status(200);
         res.body.should.have.property('token');
         done();
       });
   });
 });
+
