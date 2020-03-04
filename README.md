@@ -52,4 +52,4 @@ npm run test
 ## Misc Documentation
 -----
 ![picfolio app architecture diagram](https://i.imgur.com/a4cOlNd.png)
-![picfolio app home page](https://imgur.com/ClEVAJS)
+![picfolio app home page](https://i.imgur.com/ClEVAJS.jpg)
